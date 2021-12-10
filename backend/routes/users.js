@@ -1,7 +1,8 @@
 const express = require('express')
 const router = express.Router()
 const axios = require('axios');
-require('dotenv').config()
+
+let users = [], images = [], combined = []
 
 const getFakeUsers = async (page, limit) => {
   try {
@@ -13,15 +14,38 @@ const getFakeUsers = async (page, limit) => {
   }
 }
 
-let users = []
+const getFakeImages = async (limit) => {
+  try {
+    const response = await axios.get(`https://dummyjson.com/users?limit=${limit}&select=firstName,age,image`)
+    images = response.data.users
+  }
+  catch (err) {
+    console.log(err)
+  }
+}
+
+const combineFakeData = () => {
+  users.map(user => {
+    const {id, firstName, lastName, address: {city}} = user
+    combined[id-1] = {lastName, city}
+  })
+  images.map(image => {
+    const {id: userId, image: thumb} = image
+    combined[userId-1].thumb = thumb.replace("=50x50","=250x250").replace("=set1","=set3")
+  })
+}
+
 getFakeUsers(1,12)
+getFakeImages(12)
+
 
 router.get("/", (req, res) => {
   res.send("use users/protected?apikey=")
 })
 
 router.get("/protected", (req, res) => {
-  req.query.apikey === process.env.SECRET ? res.json(users) : res.send("Use the correct api key")
+  combineFakeData()
+  req.query.apikey === process.env.SECRET ? res.json(combined) : res.send("Use the correct api key")
 })
 
 // router.post('/', (req, res) => {  

@@ -1,10 +1,13 @@
 const express = require('express')
+require('dotenv').config()
 
 const app = express()
 
 app.use(express.static("public")) //Serve all files from public
 app.use(express.urlencoded({extended: true})) //read body of req
 app.use(express.json()) //to allow (fetch from client to server/or call an api to use) json from the body
+
+
 
 // app.set('view engine', 'ejs') // or 'pug'
 app.use(logger) //middleware
@@ -21,4 +24,3 @@ function logger(req, res, next) {
 }
 
 app.listen(3000)
-
