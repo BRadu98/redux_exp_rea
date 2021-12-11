@@ -1,2 +1,2 @@
-Backend - Express - Fetch data from 2 apis, combine them and serve the combined data on a protected route (cd backend, yarn install, touch .env, SECRET="yoursecret", package.json >> "scripts": { "dev": "nodemon server.js"} , yarn dev)
+Backend - Express - Fetch data from 2 apis, combine them and serve the combined data on a protected route (cd backend, yarn install, touch .env >> SECRET="yoursecret", touch .gitignore >> node_modules .env , package.json >> "scripts": { "dev": "nodemon server.js"} , yarn dev)
 Frontend - React - Fetch data from backend, render users ( cd frontend, yarn install, touch .env.local >> REACT_APP_BACKEND_URL="http://localhost:4000/users/protected?apikey='yoursecret'" , yarn start
