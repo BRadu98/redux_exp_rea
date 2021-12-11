@@ -1,0 +1,21 @@
+/* use classes if this should not be global style */
+
+.button {
+  font: inherit;
+  cursor: inherit;
+  border: 1px solid red;
+  background: red;
+  color: white;
+  padding: 0.5rem 2rem;
+}
+
+.button:focus {
+ outline: none;
+}
+
+.button:hover,
+.button:active {
+  background: lightpink;
+  color: black;
+  border-color: lightpink;
+}

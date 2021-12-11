@@ -20,7 +20,8 @@ app.use('/users', userRouter)
 
 function logger(req, res, next) {
   console.log( req.originalUrl )
+  res.header("Access-Control-Allow-Origin", "http://localhost:3000")
   next()
 }
 
-app.listen(3000)
+app.listen(4000)
